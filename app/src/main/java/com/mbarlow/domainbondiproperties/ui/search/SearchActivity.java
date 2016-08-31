@@ -17,11 +17,9 @@ import rx.schedulers.Schedulers;
 
 public class SearchActivity extends AppCompatActivity implements SearchContract.View{
 
-    // Temporary
-    @BindView(R.id.text)
-    TextView text;
-
     private SearchContract.Presenter searchPresenter;
+
+    ListFragment listFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,28 +30,35 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         searchPresenter = new SearchPresenter(Injection.provideListingRepository(), Schedulers.io(), AndroidSchedulers.mainThread());
         searchPresenter.attachView(this);
 
-        searchPresenter.refreshListings();
+        listFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment);
+
+        if (listFragment.getListings() == null){
+            searchPresenter.refreshListings();
+        }
+
         searchPresenter.getListings();
     }
 
     @Override
     public void showListings(List<Listing> listingResults){
-        //TODO:
-        text.setText("Show search results here");
+        listFragment.setListings(listingResults);
     }
 
     @Override
     public void showError(String message) {
-        text.setText("Error: " + message);
+        //TODO: Toast?
+//        text.setText("Error: " + message);
     }
 
     @Override
     public void showLoading() {
-        text.setText("Loading...");
+        // Probably should delegate to fragment with list
+//        text.setText("Loading...");
     }
 
     @Override
     public void hideLoading() {
-        text.setText("Done loading...");
+        // Probably should delegate to fragment with list
+//        text.setText("Done loading...");
     }
 }
