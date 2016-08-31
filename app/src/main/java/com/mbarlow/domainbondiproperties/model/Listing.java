@@ -1,18 +1,29 @@
 
 package com.mbarlow.domainbondiproperties.model;
 
+import com.google.gson.annotations.SerializedName;
+import com.orm.dsl.Table;
+
+@Table
 public class Listing {
 
-    private String agencyLogoUrl;
-    private int bathrooms;
-    private int bedrooms;
-    private int carspaces;
-    private String displayPrice;
-    private String displayableAddress;
-    private String truncatedDescription;
-    private String retinaDisplayThumbUrl;
-    private String secondRetinaDisplayThumbUrl;
-    private int isElite;
+    @SerializedName("AdId")
+    Long id;
+    String agencyLogoUrl;
+    int bathrooms;
+    int bedrooms;
+    int carspaces;
+    String displayPrice;
+    String displayableAddress;
+    String truncatedDescription;
+    String retinaDisplayThumbUrl;
+    String secondRetinaDisplayThumbUrl;
+    int isElite;
+
+    // Default constructor necessary for SugarRecord
+    public Listing(){
+
+    }
 
     /**
      * @return The agencyLogoUrl
@@ -152,6 +163,14 @@ public class Listing {
      */
     public void setIsElite(int isElite) {
         this.isElite = isElite;
+    }
+
+    public long getAdId(){
+        return this.id;
+    }
+
+    public void setAdId(long adId){
+        this.id = adId;
     }
 
 }

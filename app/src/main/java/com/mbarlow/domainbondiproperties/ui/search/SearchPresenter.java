@@ -29,7 +29,23 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
      */
     @Override
     public void getListings() {
-        //TODO
+        addSubscription(listingRepository.getListings().subscribeOn(ioScheduler).observeOn(mainScheduler)
+                .subscribe(new Subscriber<List<Listing>>() {
+                    @Override
+                    public void onCompleted() {
+                        // Nothing
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.showError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(List<Listing> listings) {
+                        view.showListings(listings);
+                    }
+                }));
     }
 
     /**

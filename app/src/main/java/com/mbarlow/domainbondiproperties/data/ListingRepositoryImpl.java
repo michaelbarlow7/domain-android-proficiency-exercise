@@ -2,6 +2,7 @@ package com.mbarlow.domainbondiproperties.data;
 
 import com.mbarlow.domainbondiproperties.data.remote.DomainRestService;
 import com.mbarlow.domainbondiproperties.model.Listing;
+import com.orm.SugarRecord;
 
 import java.util.List;
 
@@ -20,14 +21,17 @@ public class ListingRepositoryImpl implements ListingRepository {
 
     @Override
     public Observable<List<Listing>> refreshListings() {
-        Observable<List<Listing>> observable = Observable.defer(() -> domainRestService.getListings()
-                .concatMap(apiResponse -> Observable.just(apiResponse.getListingResults().getListings())));
-        return observable;
+        return Observable.defer(() -> domainRestService.getListings()
+                .concatMap(apiResponse -> Observable.just(apiResponse.getListingResults().getListings()))
+                .doOnNext(listings -> {
+                            SugarRecord.deleteAll(Listing.class);
+                            SugarRecord.saveInTx(listings);
+                        }
+                ));
     }
 
     @Override
     public Observable<List<Listing>> getListings() {
-        // Get from db
-        return null;
+        return Observable.defer(() -> Observable.just(SugarRecord.listAll(Listing.class)));
     }
 }
