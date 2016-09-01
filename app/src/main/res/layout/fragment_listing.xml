@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listingAdIdView"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textStyle="bold"
+    android:textSize="20sp"
+    android:textColor="@color/colorAccent"
+    android:text="Select a property on the left"
+    tools:context=".ui.listing.ListingFragment"/>

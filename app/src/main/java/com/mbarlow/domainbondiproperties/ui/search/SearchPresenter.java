@@ -1,8 +1,13 @@
 package com.mbarlow.domainbondiproperties.ui.search;
 
 import com.mbarlow.domainbondiproperties.data.ListingRepository;
+import com.mbarlow.domainbondiproperties.event.ListingItemSelectedEvent;
 import com.mbarlow.domainbondiproperties.model.Listing;
 import com.mbarlow.domainbondiproperties.ui.base.BasePresenter;
+import com.mbarlow.domainbondiproperties.ui.search.SearchContract.View;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -21,6 +26,18 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
         this.listingRepository = listingRepository;
         this.ioScheduler = ioScheduler;
         this.mainScheduler = mainScheduler;
+    }
+
+    @Override
+    public void attachView(View mvpView) {
+        super.attachView(mvpView);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void detachView() {
+        super.detachView();
+        EventBus.getDefault().unregister(this);
     }
 
     /**
@@ -73,5 +90,10 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
                         getListings();
                     }
                 }));
+    }
+
+    @Subscribe
+    public void onEventMainThread(ListingItemSelectedEvent event){
+        view.showListing(event.getSelectedAdId());
     }
 }

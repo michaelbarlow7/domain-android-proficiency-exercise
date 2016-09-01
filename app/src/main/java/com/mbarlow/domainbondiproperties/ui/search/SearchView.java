@@ -20,6 +20,8 @@ interface SearchContract {
         void showLoading();
 
         void hideLoading();
+
+        void showListing(long listingId);
     }
 
     interface Presenter extends MvpPresenter<View> {

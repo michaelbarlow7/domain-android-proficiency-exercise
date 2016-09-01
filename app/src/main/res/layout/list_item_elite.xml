@@ -66,8 +66,6 @@
             android:layout_below="@id/bedBathCar"
             android:textSize="16sp"
             android:textColor="@android:color/darker_gray"
-            android:singleLine="true"
-            android:ellipsize="marquee"
             />
         <ImageView
             android:id="@+id/agencyLogo"

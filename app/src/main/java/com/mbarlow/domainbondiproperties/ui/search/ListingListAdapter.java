@@ -5,14 +5,18 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mbarlow.domainbondiproperties.R;
+import com.mbarlow.domainbondiproperties.event.ListingItemSelectedEvent;
 import com.mbarlow.domainbondiproperties.model.Listing;
 import com.mbarlow.domainbondiproperties.ui.search.ListingListAdapter.ListingViewHolder;
 import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -29,7 +33,9 @@ public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
 
     private List<Listing> listings;
 
-    public static class ListingViewHolder extends RecyclerView.ViewHolder {
+    public static class ListingViewHolder extends RecyclerView.ViewHolder implements OnClickListener{
+
+        public long listingAdId;
 
         @BindView(R.id.retinaDisplayImage) public ImageView retinaDisplayImage;
         @Nullable
@@ -41,7 +47,13 @@ public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
 
         public ListingViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             ButterKnife.bind(this, itemView);
+        }
+
+        @Override
+        public void onClick(View view) {
+            EventBus.getDefault().post(new ListingItemSelectedEvent(listingAdId));
         }
     }
 
@@ -99,6 +111,8 @@ public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
         holder.bedBathCar.setText(bedBathCarText);
 
         holder.address.setText(listing.getDisplayableAddress());
+
+        holder.listingAdId = listing.getAdId();
 
         picasso.load(listing.getAgencyLogoUrl()).into(holder.agencyLogo);
     }

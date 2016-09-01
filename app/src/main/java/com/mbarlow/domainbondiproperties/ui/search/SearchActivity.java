@@ -1,12 +1,14 @@
 package com.mbarlow.domainbondiproperties.ui.search;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mbarlow.domainbondiproperties.R;
 import com.mbarlow.domainbondiproperties.injection.Injection;
 import com.mbarlow.domainbondiproperties.model.Listing;
+import com.mbarlow.domainbondiproperties.ui.listing.ListingActivity;
 
 import java.util.List;
 
@@ -45,8 +47,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
     @Override
     public void showError(String message) {
-        //TODO: Toast?
-//        text.setText("Error: " + message);
+        Toast.makeText(this, "Error getting listings: " + message, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -59,5 +60,14 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     public void hideLoading() {
         // Probably should delegate to fragment with list
 //        text.setText("Done loading...");
+    }
+
+    @Override
+    public void showListing(long listingId) {
+        // If listing fragment is available, set its listing id
+        Intent intent = new Intent(this, ListingActivity.class);
+        intent.putExtra(ListingActivity.LISTING_AD_ID_EXTRA, listingId);
+        startActivity(intent);
+        // Else, show new activity
     }
 }
