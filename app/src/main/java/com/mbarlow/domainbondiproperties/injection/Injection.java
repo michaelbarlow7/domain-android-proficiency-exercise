@@ -16,10 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by michael on 31/08/16.
  *
- * TODO: Replace with Dagger
  */
 public class Injection {
-    //TODO: This doesn't really belong here...
     private static final String BASE_URL = "https://rest.domain.com.au";
 
     private static DomainRestService domainRestService;
