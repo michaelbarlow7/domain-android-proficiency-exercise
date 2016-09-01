@@ -154,15 +154,15 @@ public class Listing {
     /**
      * @return The isElite
      */
-    public int getIsElite() {
-        return isElite;
+    public boolean isElite() {
+        return isElite != 0;
     }
 
     /**
      * @param isElite The IsElite
      */
-    public void setIsElite(int isElite) {
-        this.isElite = isElite;
+    public void setIsElite(boolean isElite) {
+        this.isElite = isElite ? 1 : 0;
     }
 
     public long getAdId(){

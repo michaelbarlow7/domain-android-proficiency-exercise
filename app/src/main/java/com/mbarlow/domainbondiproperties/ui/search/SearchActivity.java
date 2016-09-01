@@ -10,7 +10,6 @@ import com.mbarlow.domainbondiproperties.model.Listing;
 
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

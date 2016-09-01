@@ -3,14 +3,19 @@ package com.mbarlow.domainbondiproperties.ui.search;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mbarlow.domainbondiproperties.R;
 import com.mbarlow.domainbondiproperties.model.Listing;
+import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by michael on 31/08/16.
@@ -18,6 +23,12 @@ import java.util.List;
 public class ListFragment extends Fragment {
 
     private List<Listing> listings;
+
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +40,15 @@ public class ListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
+        ButterKnife.bind(this, view);
+
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        return view;
     }
 
     public List<Listing> getListings() {
@@ -38,6 +57,10 @@ public class ListFragment extends Fragment {
 
     public void setListings(List<Listing> listings) {
         this.listings = listings;
-        // Set adapter
+
+        // TODO: If not null, change data and notify
+        adapter = new ListingListAdapter(listings);
+
+        recyclerView.setAdapter(adapter);
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Domain Bondi Properties</string>
+    <string name="listing_features_template">%1$s bed, %2$s bath, %3$s car</string>
 </resources>
