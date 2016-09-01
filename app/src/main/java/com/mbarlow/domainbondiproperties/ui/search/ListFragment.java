@@ -27,7 +27,7 @@ public class ListFragment extends Fragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    private RecyclerView.Adapter adapter;
+    private ListingListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -58,8 +58,12 @@ public class ListFragment extends Fragment {
     public void setListings(List<Listing> listings) {
         this.listings = listings;
 
-        // TODO: If not null, change data and notify
-        adapter = new ListingListAdapter(listings);
+        if (adapter == null){
+            adapter = new ListingListAdapter(listings);
+        }else{
+            adapter.setListings(listings);
+            adapter.notifyDataSetChanged();
+        }
 
         recyclerView.setAdapter(adapter);
     }

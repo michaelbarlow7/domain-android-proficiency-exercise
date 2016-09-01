@@ -46,6 +46,10 @@ public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
         this.listings = listings;
     }
 
+    public void setListings(List<Listing> listings){
+        this.listings = listings;
+    }
+
     @Override
     public int getItemViewType(int position) {
         Listing listing = listings.get(position);
@@ -71,12 +75,16 @@ public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
         Listing listing = listings.get(position);
 
         Picasso picasso = Picasso.with(holder.retinaDisplayImage.getContext());
-        picasso.load(listing.getRetinaDisplayThumbUrl()).into(holder.retinaDisplayImage);
+        picasso.load(listing.getRetinaDisplayThumbUrl())
+                .placeholder(R.drawable.placeholder)
+                .into(holder.retinaDisplayImage);
 
         if (holder.secondRetinaDisplayImage != null) {
             String secondRetinaDisplayThumbUrl = listing.getSecondRetinaDisplayThumbUrl();
             if (secondRetinaDisplayThumbUrl != null && !secondRetinaDisplayThumbUrl.isEmpty()){
-                picasso.load(secondRetinaDisplayThumbUrl).into(holder.secondRetinaDisplayImage);
+                picasso.load(secondRetinaDisplayThumbUrl)
+                        .placeholder(R.drawable.placeholder)
+                        .into(holder.secondRetinaDisplayImage);
             }else{
                 holder.secondRetinaDisplayImage.setImageBitmap(null);
             }

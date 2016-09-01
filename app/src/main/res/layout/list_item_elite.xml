@@ -1,44 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp">
+    card_view:cardUseCompatPadding="true"
+    card_view:cardCornerRadius="8dp">
     <RelativeLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/retinaDisplayImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <ImageView
-            android:id="@+id/secondRetinaDisplayImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/retinaDisplayImage"
-            android:layout_alignTop="@id/retinaDisplayImage"
-            android:layout_alignBottom="@id/retinaDisplayImage"
-            />
+        <LinearLayout
+            android:id="@+id/imageLayout"
+            android:orientation="horizontal"
+            android:dividerPadding="5dp"
+            android:divider="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/retinaDisplayImage"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:padding="2dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/secondRetinaDisplayImage"
+                android:padding="2dp"
+                android:adjustViewBounds="true"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
         <TextView
             android:id="@+id/displayPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/retinaDisplayImage"
+            android:layout_below="@id/imageLayout"
+            android:singleLine="true"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/priceColor"
             />
         <TextView
             android:id="@+id/bedBathCar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/displayPrice"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
             />
         <TextView
             android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/bedBathCar"
+            android:textSize="16sp"
+            android:textColor="@android:color/darker_gray"
+            android:singleLine="true"
+            android:ellipsize="marquee"
             />
         <ImageView
             android:id="@+id/agencyLogo"
