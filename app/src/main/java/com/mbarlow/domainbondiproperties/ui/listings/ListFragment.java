@@ -1,4 +1,4 @@
-package com.mbarlow.domainbondiproperties.ui.search;
+package com.mbarlow.domainbondiproperties.ui.listings;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

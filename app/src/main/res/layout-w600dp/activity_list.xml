@@ -4,7 +4,7 @@
               android:orientation="horizontal"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
-    <fragment class="com.mbarlow.domainbondiproperties.ui.search.ListFragment"
+    <fragment class="com.mbarlow.domainbondiproperties.ui.listings.ListFragment"
               android:id="@+id/listFragment"
               android:layout_width="400dp"
               android:layout_height="match_parent"

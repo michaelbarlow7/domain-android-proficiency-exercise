@@ -1,11 +1,11 @@
-package com.mbarlow.domainbondiproperties.ui.search;
+package com.mbarlow.domainbondiproperties.ui.listings;
 
 import com.mbarlow.domainbondiproperties.data.ListingRepository;
 import com.mbarlow.domainbondiproperties.event.ListingItemSelectedEvent;
 import com.mbarlow.domainbondiproperties.event.RefreshCalledEvent;
 import com.mbarlow.domainbondiproperties.model.Listing;
 import com.mbarlow.domainbondiproperties.ui.base.BasePresenter;
-import com.mbarlow.domainbondiproperties.ui.search.SearchContract.View;
+import com.mbarlow.domainbondiproperties.ui.listings.ListingsContract.View;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -18,12 +18,12 @@ import rx.Subscriber;
 /**
  * Created by michael on 30/08/16.
  */
-public class SearchPresenter extends BasePresenter<SearchContract.View> implements SearchContract.Presenter{
+public class ListingsPresenter extends BasePresenter<ListingsContract.View> implements ListingsContract.Presenter{
 
     private final Scheduler mainScheduler, ioScheduler;
     private final ListingRepository listingRepository;
 
-    public SearchPresenter(ListingRepository listingRepository, Scheduler ioScheduler, Scheduler mainScheduler) {
+    public ListingsPresenter(ListingRepository listingRepository, Scheduler ioScheduler, Scheduler mainScheduler) {
         this.listingRepository = listingRepository;
         this.ioScheduler = ioScheduler;
         this.mainScheduler = mainScheduler;

@@ -1,8 +1,7 @@
-package com.mbarlow.domainbondiproperties.ui.search;
+package com.mbarlow.domainbondiproperties.ui.listings;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import com.mbarlow.domainbondiproperties.R;
 import com.mbarlow.domainbondiproperties.event.ListingItemSelectedEvent;
 import com.mbarlow.domainbondiproperties.model.Listing;
-import com.mbarlow.domainbondiproperties.ui.search.ListingListAdapter.ListingViewHolder;
+import com.mbarlow.domainbondiproperties.ui.listings.ListingListAdapter.ListingViewHolder;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;

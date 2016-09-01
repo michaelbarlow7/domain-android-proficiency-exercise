@@ -1,4 +1,4 @@
-package com.mbarlow.domainbondiproperties.ui.search;
+package com.mbarlow.domainbondiproperties.ui.listings;
 
 import com.mbarlow.domainbondiproperties.model.Listing;
 import com.mbarlow.domainbondiproperties.ui.base.MvpPresenter;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by michael on 31/08/16.
  */
-interface SearchContract {
+interface ListingsContract {
 
     interface View extends MvpView {
 

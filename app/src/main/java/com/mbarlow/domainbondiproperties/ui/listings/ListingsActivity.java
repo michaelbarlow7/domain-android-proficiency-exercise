@@ -1,4 +1,4 @@
-package com.mbarlow.domainbondiproperties.ui.search;
+package com.mbarlow.domainbondiproperties.ui.listings;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -18,9 +18,9 @@ import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class SearchActivity extends AppCompatActivity implements SearchContract.View {
+public class ListingsActivity extends AppCompatActivity implements ListingsContract.View {
 
-    private SearchContract.Presenter searchPresenter;
+    private ListingsContract.Presenter searchPresenter;
 
     ListFragment listFragment;
 
@@ -31,7 +31,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
         ButterKnife.bind(this);
 
-        searchPresenter = new SearchPresenter(Injection.provideListingRepository(), Schedulers.io(), AndroidSchedulers.mainThread());
+        searchPresenter = new ListingsPresenter(Injection.provideListingRepository(), Schedulers.io(), AndroidSchedulers.mainThread());
         searchPresenter.attachView(this);
 
         listFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment);
