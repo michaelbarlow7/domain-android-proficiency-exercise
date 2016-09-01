@@ -67,6 +67,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         // If listing fragment is available, set its listing id
         Intent intent = new Intent(this, ListingActivity.class);
         intent.putExtra(ListingActivity.LISTING_AD_ID_EXTRA, listingId);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         // Else, show new activity
     }
