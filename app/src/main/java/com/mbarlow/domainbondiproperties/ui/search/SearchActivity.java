@@ -1,6 +1,7 @@
 package com.mbarlow.domainbondiproperties.ui.search;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -9,6 +10,7 @@ import com.mbarlow.domainbondiproperties.R;
 import com.mbarlow.domainbondiproperties.injection.Injection;
 import com.mbarlow.domainbondiproperties.model.Listing;
 import com.mbarlow.domainbondiproperties.ui.listing.ListingActivity;
+import com.mbarlow.domainbondiproperties.ui.listing.ListingFragment;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class SearchActivity extends AppCompatActivity implements SearchContract.View{
+public class SearchActivity extends AppCompatActivity implements SearchContract.View {
 
     private SearchContract.Presenter searchPresenter;
 
@@ -26,6 +28,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
         ButterKnife.bind(this);
 
         searchPresenter = new SearchPresenter(Injection.provideListingRepository(), Schedulers.io(), AndroidSchedulers.mainThread());
@@ -33,7 +36,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
         listFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment);
 
-        if (listFragment.getListings() == null){
+        if (listFragment.getListings() == null) {
             searchPresenter.refreshListings();
         }
 
@@ -41,7 +44,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     }
 
     @Override
-    public void showListings(List<Listing> listingResults){
+    public void showListings(List<Listing> listingResults) {
         listFragment.setListings(listingResults);
     }
 
@@ -64,11 +67,20 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
     @Override
     public void showListing(long listingId) {
-        // If listing fragment is available, set its listing id
-        Intent intent = new Intent(this, ListingActivity.class);
-        intent.putExtra(ListingActivity.LISTING_AD_ID_EXTRA, listingId);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        // Else, show new activity
+        Fragment listingFragment = getSupportFragmentManager().findFragmentById(R.id.listingFragment);
+        if (listingFragment != null && listingFragment.isInLayout()) {
+            ((ListingFragment) listingFragment).setListingAdId(listingId);
+        }else{
+            Intent intent = new Intent(this, ListingActivity.class);
+            intent.putExtra(ListingActivity.LISTING_AD_ID_EXTRA, listingId);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        searchPresenter.detachView();
     }
 }

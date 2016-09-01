@@ -9,5 +9,5 @@
     android:textStyle="bold"
     android:textSize="20sp"
     android:textColor="@color/colorAccent"
-    android:text="Select a property on the left"
+    android:text="@string/no_listing_selected"
     tools:context=".ui.listing.ListingFragment"/>
