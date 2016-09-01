@@ -35,6 +35,9 @@ public class ListFragment extends Fragment implements OnRefreshListener {
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    @BindView(R.id.emptyView)
+    View emptyView;
+
     private ListingListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -77,6 +80,11 @@ public class ListFragment extends Fragment implements OnRefreshListener {
         }
 
         recyclerView.setAdapter(adapter);
+
+        if (!listings.isEmpty()){
+            swipeRefreshLayout.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
