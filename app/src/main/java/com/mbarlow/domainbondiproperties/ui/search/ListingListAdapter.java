@@ -1,5 +1,6 @@
 package com.mbarlow.domainbondiproperties.ui.search;
 
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Optional;
 
 /**
  * Created by michael on 1/09/16.
@@ -30,6 +32,7 @@ public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
     public static class ListingViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.retinaDisplayImage) public ImageView retinaDisplayImage;
+        @Nullable
         @BindView(R.id.secondRetinaDisplayImage) public ImageView secondRetinaDisplayImage;
         @BindView(R.id.displayPrice) public TextView displayPrice;
         @BindView(R.id.bedBathCar) public TextView bedBathCar;
@@ -58,13 +61,12 @@ public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
 
     @Override
     public ListingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        if (VIEW_TYPE_NORMAL == viewType){
-//            // inflate normal layout
-//        }else {
-//            // inflate elite layout
-//        }
-        // TODO: Differentiate between elite and normal and inflate appropriately
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_elite, parent, false);
+        View view;
+        if (VIEW_TYPE_NORMAL == viewType){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_normal, parent, false);
+        }else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_elite, parent, false);
+        }
         ListingViewHolder listingViewHolder = new ListingViewHolder(view);
         return listingViewHolder;
     }

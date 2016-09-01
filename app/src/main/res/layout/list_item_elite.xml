@@ -9,9 +9,7 @@
     card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="8dp">
     <RelativeLayout
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingRight="5dp"
+        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout

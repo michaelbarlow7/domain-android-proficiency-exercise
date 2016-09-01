@@ -70,7 +70,7 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
                     @Override
                     public void onNext(List<Listing> listings) {
                         view.hideLoading();
-                        view.showListings(listings);
+                        getListings();
                     }
                 }));
     }
