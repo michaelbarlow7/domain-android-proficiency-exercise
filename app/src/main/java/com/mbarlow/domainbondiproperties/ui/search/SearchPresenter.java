@@ -2,6 +2,7 @@ package com.mbarlow.domainbondiproperties.ui.search;
 
 import com.mbarlow.domainbondiproperties.data.ListingRepository;
 import com.mbarlow.domainbondiproperties.event.ListingItemSelectedEvent;
+import com.mbarlow.domainbondiproperties.event.RefreshCalledEvent;
 import com.mbarlow.domainbondiproperties.model.Listing;
 import com.mbarlow.domainbondiproperties.ui.base.BasePresenter;
 import com.mbarlow.domainbondiproperties.ui.search.SearchContract.View;
@@ -95,5 +96,10 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
     @Subscribe
     public void onEventMainThread(ListingItemSelectedEvent event){
         view.showListing(event.getSelectedAdId());
+    }
+
+    @Subscribe
+    public void onEvent(RefreshCalledEvent event){
+        refreshListings();
     }
 }

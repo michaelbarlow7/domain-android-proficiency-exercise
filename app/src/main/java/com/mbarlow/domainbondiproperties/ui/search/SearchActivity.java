@@ -56,13 +56,12 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     @Override
     public void showLoading() {
         // Probably should delegate to fragment with list
-//        text.setText("Loading...");
+        listFragment.showLoading();
     }
 
     @Override
     public void hideLoading() {
-        // Probably should delegate to fragment with list
-//        text.setText("Done loading...");
+        listFragment.hideLoading();
     }
 
     @Override

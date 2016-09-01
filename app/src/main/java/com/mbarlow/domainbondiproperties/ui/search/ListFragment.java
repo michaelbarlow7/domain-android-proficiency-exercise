@@ -3,14 +3,19 @@ package com.mbarlow.domainbondiproperties.ui.search;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mbarlow.domainbondiproperties.R;
+import com.mbarlow.domainbondiproperties.event.RefreshCalledEvent;
 import com.mbarlow.domainbondiproperties.model.Listing;
 import android.support.v7.widget.RecyclerView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -20,12 +25,15 @@ import butterknife.ButterKnife;
 /**
  * Created by michael on 31/08/16.
  */
-public class ListFragment extends Fragment {
+public class ListFragment extends Fragment implements OnRefreshListener {
 
     private List<Listing> listings;
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private ListingListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -48,6 +56,9 @@ public class ListFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeColors(getContext().getResources().getColor(R.color.colorPrimary), getContext().getResources().getColor(R.color.colorPrimaryDark));
+
         return view;
     }
 
@@ -66,5 +77,18 @@ public class ListFragment extends Fragment {
         }
 
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onRefresh() {
+        EventBus.getDefault().post(new RefreshCalledEvent());
+    }
+
+    public void hideLoading() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    public void showLoading() {
+        swipeRefreshLayout.setRefreshing(true);
     }
 }
