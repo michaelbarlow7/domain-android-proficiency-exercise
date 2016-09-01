@@ -2,6 +2,7 @@ package com.mbarlow.domainbondiproperties.ui.listing;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import com.mbarlow.domainbondiproperties.R;
 
@@ -22,5 +23,16 @@ public class ListingActivity extends AppCompatActivity {
         ListingFragment listingFragment = (ListingFragment) getSupportFragmentManager().findFragmentById(R.id.listingFragment);
 
         listingFragment.setListingAdId(listingAdId);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
