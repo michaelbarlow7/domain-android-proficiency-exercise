@@ -19,7 +19,7 @@ public class ApiResponse {
         this.listingResults = listingResults;
     }
 
-    public class ListingResults {
+    public static class ListingResults {
         private List<Listing> listings;
 
         public List<Listing> getListings() {

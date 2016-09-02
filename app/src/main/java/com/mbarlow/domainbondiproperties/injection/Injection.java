@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mbarlow.domainbondiproperties.data.ListingRepository;
 import com.mbarlow.domainbondiproperties.data.ListingRepositoryImpl;
+import com.mbarlow.domainbondiproperties.data.local.DatabaseHelper;
+import com.mbarlow.domainbondiproperties.data.local.DatabaseHelperImpl;
 import com.mbarlow.domainbondiproperties.data.remote.DomainRestService;
 
 import okhttp3.OkHttpClient;
@@ -23,9 +25,10 @@ public class Injection {
     private static DomainRestService domainRestService;
     private static OkHttpClient okHttpClient;
     private static Retrofit retrofitInstance;
+    private static DatabaseHelper databaseHelper;
 
     public static ListingRepository provideListingRepository() {
-        return new ListingRepositoryImpl(provideDomainRestService());
+        return new ListingRepositoryImpl(provideDomainRestService(), provideDatabaseHelper());
     }
 
     private static DomainRestService provideDomainRestService() {
@@ -57,5 +60,12 @@ public class Injection {
                     .build();
         }
         return okHttpClient;
+    }
+
+    public static DatabaseHelper provideDatabaseHelper(){
+        if (databaseHelper == null){
+            databaseHelper = new DatabaseHelperImpl();
+        }
+        return databaseHelper;
     }
 }
