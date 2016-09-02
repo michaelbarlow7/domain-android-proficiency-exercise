@@ -1,6 +1,7 @@
 package com.mbarlow.domainbondiproperties.ui.listings;
 
 import com.mbarlow.domainbondiproperties.data.ListingRepository;
+import com.mbarlow.domainbondiproperties.event.EventBusProvider;
 import com.mbarlow.domainbondiproperties.event.ListingItemSelectedEvent;
 import com.mbarlow.domainbondiproperties.event.RefreshCalledEvent;
 import com.mbarlow.domainbondiproperties.model.Listing;
@@ -22,23 +23,25 @@ public class ListingsPresenter extends BasePresenter<ListingsContract.View> impl
 
     private final Scheduler mainScheduler, ioScheduler;
     private final ListingRepository listingRepository;
+    private final EventBusProvider eventBusProvider;
 
-    public ListingsPresenter(ListingRepository listingRepository, Scheduler ioScheduler, Scheduler mainScheduler) {
+    public ListingsPresenter(ListingRepository listingRepository, Scheduler ioScheduler, Scheduler mainScheduler, EventBusProvider eventBusProvider) {
         this.listingRepository = listingRepository;
         this.ioScheduler = ioScheduler;
         this.mainScheduler = mainScheduler;
+        this.eventBusProvider = eventBusProvider;
     }
 
     @Override
     public void attachView(View mvpView) {
         super.attachView(mvpView);
-        EventBus.getDefault().register(this);
+        eventBusProvider.provideEventBus().register(this);
     }
 
     @Override
     public void detachView() {
         super.detachView();
-        EventBus.getDefault().unregister(this);
+        eventBusProvider.provideEventBus().unregister(this);
     }
 
     /**

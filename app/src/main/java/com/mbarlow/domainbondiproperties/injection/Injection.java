@@ -8,6 +8,8 @@ import com.mbarlow.domainbondiproperties.data.ListingRepositoryImpl;
 import com.mbarlow.domainbondiproperties.data.local.DatabaseHelper;
 import com.mbarlow.domainbondiproperties.data.local.DatabaseHelperImpl;
 import com.mbarlow.domainbondiproperties.data.remote.DomainRestService;
+import com.mbarlow.domainbondiproperties.event.EventBusProvider;
+import com.mbarlow.domainbondiproperties.event.EventBusProviderImpl;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -26,6 +28,7 @@ public class Injection {
     private static OkHttpClient okHttpClient;
     private static Retrofit retrofitInstance;
     private static DatabaseHelper databaseHelper;
+    private static EventBusProvider eventBusProvider;
 
     public static ListingRepository provideListingRepository() {
         return new ListingRepositoryImpl(provideDomainRestService(), provideDatabaseHelper());
@@ -67,5 +70,12 @@ public class Injection {
             databaseHelper = new DatabaseHelperImpl();
         }
         return databaseHelper;
+    }
+
+    public static EventBusProvider provideEventBusProvider(){
+        if (eventBusProvider == null){
+            eventBusProvider = new EventBusProviderImpl();
+        }
+        return eventBusProvider;
     }
 }

@@ -31,7 +31,7 @@ public class ListingsActivity extends AppCompatActivity implements ListingsContr
 
         ButterKnife.bind(this);
 
-        searchPresenter = new ListingsPresenter(Injection.provideListingRepository(), Schedulers.io(), AndroidSchedulers.mainThread());
+        searchPresenter = new ListingsPresenter(Injection.provideListingRepository(), Schedulers.io(), AndroidSchedulers.mainThread(), Injection.provideEventBusProvider());
         searchPresenter.attachView(this);
 
         listFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment);
