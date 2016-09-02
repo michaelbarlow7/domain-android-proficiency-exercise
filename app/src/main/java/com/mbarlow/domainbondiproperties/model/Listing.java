@@ -4,6 +4,12 @@ package com.mbarlow.domainbondiproperties.model;
 import com.google.gson.annotations.SerializedName;
 import com.orm.dsl.Table;
 
+/**
+ * A POJO representing data for Listings. It is used both by Gson to deserialise data and
+ * Sugarrecord to store the data in an SQLite database.
+ *
+ * In hindsight I probably should've called this "Properties" or something less confusing :/
+ */
 @Table
 public class Listing {
 

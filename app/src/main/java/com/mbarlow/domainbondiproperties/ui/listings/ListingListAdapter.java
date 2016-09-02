@@ -24,6 +24,9 @@ import butterknife.ButterKnife;
 
 /**
  * Created by michael on 1/09/16.
+ *
+ * The adapter for Listings. Uses different layouts depending on whether the listing
+ * is elite or not.
  */
 public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
     public final int VIEW_TYPE_NORMAL = 0;
@@ -31,7 +34,13 @@ public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
 
     private List<Listing> listings;
 
-    public static class ListingViewHolder extends RecyclerView.ViewHolder implements OnClickListener{
+    /**
+     * The ViewHolder for both normal and elite listings is the same, the only difference is the
+     * XML layout file used. The elements have the same IDs and are used for the same purpose.
+     * The only difference here is that normal listings don't show a second image, so this
+     * element can be missing (hence the "@Nullable" annotation)
+     */
+    public static class ListingViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
         public long listingAdId;
 
@@ -77,8 +86,7 @@ public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
         }else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_elite, parent, false);
         }
-        ListingViewHolder listingViewHolder = new ListingViewHolder(view);
-        return listingViewHolder;
+        return new ListingViewHolder(view);
     }
 
     @Override
@@ -91,6 +99,7 @@ public class ListingListAdapter extends RecyclerView.Adapter<ListingViewHolder>{
                 .placeholder(R.drawable.placeholder)
                 .into(holder.retinaDisplayImage);
 
+        // Only load the second image if it exists in the viewholder and we have a valid url for it.
         if (holder.secondRetinaDisplayImage != null) {
             String secondRetinaDisplayThumbUrl = listing.getSecondRetinaDisplayThumbUrl();
             if (secondRetinaDisplayThumbUrl != null && !secondRetinaDisplayThumbUrl.isEmpty()){

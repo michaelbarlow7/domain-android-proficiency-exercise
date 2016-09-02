@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by michael on 2/09/16.
+ *
  */
 public interface DatabaseHelper {
 

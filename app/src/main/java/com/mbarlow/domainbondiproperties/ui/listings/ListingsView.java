@@ -8,6 +8,9 @@ import java.util.List;
 
 /**
  * Created by michael on 31/08/16.
+ *
+ * This class houses the view and presenter interfaces used in the Listings screen.
+ *
  */
 interface ListingsContract {
 

@@ -18,6 +18,8 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * A class which is used for managing dependencies. A poor-man's Dagger, so to speak :)
+ *
  * Created by michael on 31/08/16.
  *
  */

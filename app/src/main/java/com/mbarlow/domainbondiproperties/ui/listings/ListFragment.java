@@ -23,6 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
+ * Shows the Listings in a list. Handles pull-to-refresh as well.
+ *
  * Created by michael on 31/08/16.
  */
 public class ListFragment extends Fragment implements OnRefreshListener {
@@ -87,6 +89,9 @@ public class ListFragment extends Fragment implements OnRefreshListener {
         }
     }
 
+    /**
+     * Fires off an EventBus event that a refresh has been requested
+     */
     @Override
     public void onRefresh() {
         EventBus.getDefault().post(new RefreshCalledEvent());

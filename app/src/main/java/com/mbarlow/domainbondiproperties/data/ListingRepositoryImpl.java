@@ -10,6 +10,8 @@ import rx.Observable;
 
 /**
  * Created by michael on 31/08/16.
+ *
+ * A class that handles retrieving and storing Listing data.
  */
 public class ListingRepositoryImpl implements ListingRepository {
 
@@ -21,6 +23,10 @@ public class ListingRepositoryImpl implements ListingRepository {
         this.databaseHelper = databaseHelper;
     }
 
+    /**
+     * Creates and returns an observable for retrieving Listing objects from the API
+     * @return An Observable emitting a list of Listing objects
+     */
     @Override
     public Observable<List<Listing>> refreshListings() {
         return Observable.defer(() -> domainRestService.getListings()
@@ -29,6 +35,10 @@ public class ListingRepositoryImpl implements ListingRepository {
                 );
     }
 
+    /**
+     * Creates and returns an observable for getting Listing objects from persistence
+     * @return An Observable emitting a list of Listing objects
+     */
     @Override
     public Observable<List<Listing>> getListings() {
         return Observable.defer(() -> Observable.just(databaseHelper.getAllListings()));

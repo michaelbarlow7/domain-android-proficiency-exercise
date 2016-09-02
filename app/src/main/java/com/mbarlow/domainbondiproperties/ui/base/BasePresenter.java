@@ -4,6 +4,8 @@ import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
+ * A base class for presenters. Contains methods for attaching/detaching views and subscriptions
+ *
  * Created by michael on 30/08/16.
  */
 public abstract class BasePresenter<T extends MvpView> implements MvpPresenter<T>{

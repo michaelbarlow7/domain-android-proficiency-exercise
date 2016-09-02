@@ -14,6 +14,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
+ * The fragment that shows the selected Listing Ad-Id.
+ * Shown in ListingsActivity and ListingActivity
+ *
  * Created by michael on 31/08/16.
  */
 public class ListingFragment extends Fragment {
@@ -31,6 +34,7 @@ public class ListingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_listing, container, false);
         ButterKnife.bind(this, view);
 
+        // Restores data from bundle if fragment is being recreated
         if (savedInstanceState != null){
             listingAdId = savedInstanceState.getLong(LISTING_AD_ID_ARG, -1L);
 
@@ -42,6 +46,9 @@ public class ListingFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Sets the Listing's ad ID in memory and in the bundle
+     */
     public void setListingAdId(long listingAdId){
         this.listingAdId = listingAdId;
 
@@ -50,6 +57,9 @@ public class ListingFragment extends Fragment {
         }
     }
 
+    /**
+     * Stores data when screen is rotated or fragment is killed for some reason
+     */
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

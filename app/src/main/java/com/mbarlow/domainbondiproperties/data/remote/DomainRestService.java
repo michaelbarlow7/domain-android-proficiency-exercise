@@ -5,6 +5,8 @@ import rx.Observable;
 
 /**
  * Created by michael on 31/08/16.
+ *
+ * The interface for the Domain REST API, used by RetroFit
  */
 public interface DomainRestService {
 

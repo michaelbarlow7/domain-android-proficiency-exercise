@@ -18,6 +18,11 @@ import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/**
+ * Activity for showing the listings.
+ * When the screen's width is >= 600dp, this shows the listings fragment and the listing fragment in
+ * a two-pane layout. Otherwise it shows just the listings fragment.
+ */
 public class ListingsActivity extends AppCompatActivity implements ListingsContract.View {
 
     private ListingsContract.Presenter searchPresenter;
@@ -63,6 +68,12 @@ public class ListingsActivity extends AppCompatActivity implements ListingsContr
         listFragment.hideLoading();
     }
 
+    /**
+     * Called when a Listing is selected by the user.
+     * It updates the Listing Fragment if it exists and is currently been showing (when screen width is >= 600dp).
+     * Otherwise it starts the Listing Activity housing just the Listing fragment.
+     * @param listingId The selected Listing's adId
+     */
     @Override
     public void showListing(long listingId) {
         Fragment listingFragment = getSupportFragmentManager().findFragmentById(R.id.listingFragment);
@@ -76,6 +87,7 @@ public class ListingsActivity extends AppCompatActivity implements ListingsContr
         }
     }
 
+    // This should probably be moved to a base class.
     @Override
     protected void onDestroy() {
         super.onDestroy();

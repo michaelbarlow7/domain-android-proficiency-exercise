@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import com.mbarlow.domainbondiproperties.R;
 
 /**
+ * The activity for displaying a Listing. Shown when the screen width is < 600dp.
+ *
  * Created by michael on 1/09/16.
  */
 public class ListingActivity extends AppCompatActivity {
@@ -25,6 +27,9 @@ public class ListingActivity extends AppCompatActivity {
         listingFragment.setListingAdId(listingAdId);
     }
 
+    /**
+     * The up arrow just finishes the activity. Prevents loading of new data.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

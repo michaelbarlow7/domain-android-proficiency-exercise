@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Created by michael on 31/08/16.
+ *
+ * This represents the important parts of the response from the given API. This is
  */
 public class ApiResponse {
 

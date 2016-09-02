@@ -7,6 +7,9 @@ import java.util.List;
 
 /**
  * Created by michael on 2/09/16.
+ *
+ * This is a wrapper class around SugarRecord methods to facilitate mocking.
+ *
  */
 public class DatabaseHelperImpl implements DatabaseHelper{
     @Override
