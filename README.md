@@ -1,3 +1,9 @@
+This is a sample app that I made when interviewing for Domain just over a year ago. I had to update a few things to get it to compile with today's toolchain but it's mostly untouched. It's a basic app that pulls data from an API, persists it to storage (SQLite) and displays it in a list.
+
+At the time I was using the experimental Jack processor to help with annotation processing and lambdas - no Kotlin unfortunately! I couldn't use Realm and used a now-abandoned library called Sugar for as an ORM. Unfortunately it had the side-effect of not creating SQL tables when using instant-run, so you'll have to either build from the command-line or turn off instant-run to run it.
+
+=========================================================
+
 # Domain Bondi Properties take-home app
 
 This is my submission for Domain's Android Proficiency Exercise. It calls an API on Domain's servers and displays the information in a list.
